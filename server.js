@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 var cors = require('cors');
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
@@ -21,7 +22,7 @@ app.post("/checkout", async(req, res) => {
         )
     });
 
-    const session = await stripe.checkout.session.create({
+    const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
         success_url: "http://localhost:3000/success",
